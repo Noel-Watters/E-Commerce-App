@@ -18,3 +18,9 @@ export interface Rating {
 
 
 export type Category = string;
+
+export interface User {
+    id?: string;
+    name: string;
+    email: string;
+}

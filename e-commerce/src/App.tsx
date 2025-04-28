@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../src/pages/HomePage"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import RegisterPage from "./pages/RegisterPage";
+import Login from "./pages/Login";
 
 const queryClient = new QueryClient();
 
@@ -11,6 +13,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path ="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
@@ -18,4 +22,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
