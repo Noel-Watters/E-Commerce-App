@@ -2,6 +2,7 @@ import { useState, FormEvent } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
@@ -9,17 +10,28 @@ import Container from "react-bootstrap/Container";
 import RegisterButton from "../components/RegisterButton"; 
 import NavBar from "../components/NavBar";
 import Row from "react-bootstrap/Row";
+import { setUser } from "../redux/slices/UserSlice";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredentail = await signInWithEmailAndPassword(auth, email, password);
+
+      const user = userCredentail.user;
+
+      dispatch (setUser({
+        id: user.uid,
+        email: user.email || "",
+        name: user.displayName || "", // Assuming you have a displayName field in your user object
+      }))
+
       alert("Login successful!");
       navigate("/"); // Redirect to home page after successful login
     } catch (err: any) {

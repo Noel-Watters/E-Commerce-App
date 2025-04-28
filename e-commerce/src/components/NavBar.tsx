@@ -1,8 +1,19 @@
-import { Navbar, Nav, Container } from "react-bootstrap";
+import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CartButton from "./CartButton";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../redux/store"; // Adjust the path to your Redux store
+import { clearUser } from "../redux/slices/UserSlice"; // Redux action to log out the user
 
 const NavBar = () => {
+  const user = useSelector((state: RootState) => state.user.user); // Get the user state from Redux
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(clearUser()); // Clear the user state in Redux
+    alert("You have been logged out.");
+  };
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -11,9 +22,22 @@ const NavBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
-            <Nav.Link as={Link} to="/register">Register</Nav.Link>
-            <Nav.Link as={Link} to="/login">Login</Nav.Link>
-            <CartButton />
+            {user ? (
+              <>
+                <NavDropdown title="Profile" id="profile-dropdown">
+                  <NavDropdown.Item as={Link} to="/profile">Profile</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/product/edit">Edit Product</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                </NavDropdown>
+                <CartButton />
+              </>
+            ) : (
+              <>
+                <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                <CartButton />
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
