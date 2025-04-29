@@ -7,6 +7,7 @@ import ProfilePage from "./pages/ProfilePage";
 import ProductManagementPage from "./pages/ProductManagmentPage";
 import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
+import ProtectedRoute from "./components/PortectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -20,10 +21,22 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<Login />} />
-          {user && (
-            <Route path={`/profile/${user.id}`} element={<ProfilePage />} />
-          )}
-          <Route path="/product/manage" element={<ProductManagementPage />} />
+          <Route
+            path={`/profile/${user?.id}`}
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/product/manage"
+            element={
+              <ProtectedRoute>
+                <ProductManagementPage />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
