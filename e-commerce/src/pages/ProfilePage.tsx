@@ -10,7 +10,9 @@ import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import EditProfile from "../components/EditProfile";
 import { useNavigate } from "react-router-dom";
-import { User } from "../types/types"; // Import User type
+import { User } from "../types/types"; 
+//import LogOrderIDs from "../components/Testing";
+import OrderHistory from "../components/OrderHistory";
 
 const ProfilePage = () => {
   const user = useSelector((state: RootState) => state.user.user);
@@ -87,7 +89,11 @@ const ProfilePage = () => {
         onHide={() => setShowEditModal(false)}
         user={user}
         setUser={updateUserState}
-      />
+        />
+      <div className="container mt-5">
+      <OrderHistory />
+      </div>
+  
     </>
   );
 };

@@ -50,13 +50,13 @@ const CartModal: React.FC<CartModalProps> = ({ show, handleClose }) => {
                       value={item.quantity}
                       min="1"
                       onChange={(e) =>
-                        dispatch(updateQuantity({ id: item.id, quantity: Number(e.target.value) }))
+                        dispatch(updateQuantity({ id: Number(item.id), quantity: Number(e.target.value) }))
                       }
                     />
                   </td>
                   <td>${(item.price * (item.quantity || 1)).toFixed(2)}</td>
                   <td>
-                    <Button variant="danger" onClick={() => dispatch(removeFromCart(item.id))}>
+                    <Button variant="danger" onClick={() => dispatch(removeFromCart(Number(item.id)))}>
                       Remove
                     </Button>
                   </td>

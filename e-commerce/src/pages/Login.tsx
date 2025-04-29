@@ -3,6 +3,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
@@ -22,23 +24,33 @@ const Login = () => {
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const userCredentail = await signInWithEmailAndPassword(auth, email, password);
-
-      const user = userCredentail.user;
-
-      dispatch (setUser({
-        id: user.uid,
-        email: user.email || "",
-        name: user.displayName || "", // Assuming you have a displayName field in your user object
-      }))
-
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  
+      const user = userCredential.user;
+  
+      // Fetch user data from Firestore
+      const userDocRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
+  
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        dispatch(
+          setUser({
+            id: user.uid,
+            email: user.email || "",
+            name: userData.name || "", // Fetch the name from Firestore
+          })
+        );
+      } else {
+        console.error("No such user document in Firestore!");
+      }
+  
       alert("Login successful!");
       navigate("/"); // Redirect to home page after successful login
     } catch (err: any) {
       setError(err.message);
     }
   };
-
   return (
 
     <Container >

@@ -1,18 +1,13 @@
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CartButton from "./CartButton";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import { RootState } from "../redux/store"; // Adjust the path to your Redux store
-import { clearUser } from "../redux/slices/UserSlice"; // Redux action to log out the user
+ import LogoutButton from "./LogoutButton";// Redux action to log out the user
 
 const NavBar = () => {
   const user = useSelector((state: RootState) => state.user.user); // Get the user state from Redux
-  const dispatch = useDispatch();
 
-  const handleLogout = () => {
-    dispatch(clearUser()); // Clear the user state in Redux
-    alert("You have been logged out.");
-  };
 
   return (
     <Navbar bg="light" expand="lg">
@@ -28,7 +23,7 @@ const NavBar = () => {
                   <NavDropdown.Item as={Link} to={`/profile/${user.id}`}>Profile</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/product/edit">Edit Product</NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                  <NavDropdown.Item > <LogoutButton /> </NavDropdown.Item>
                 </NavDropdown>
                 <CartButton />
               </>

@@ -1,6 +1,6 @@
 
 export interface Product {
-    id: number;
+    id: number | string; // Use number or string based on your database ID type
     title: string;
     price: number;
     description: string;

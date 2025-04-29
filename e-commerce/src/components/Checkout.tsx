@@ -27,11 +27,18 @@ const Checkout = () => {
     }
 
     try {
-      // Create a new document in the /orders collection with the user's name and current date as the document ID
-      const orderId = `${user.email}_${new Date().toISOString()}`;
-
-      // Add a subcollection called UserOrder inside the order document
-      const userOrderCollectionPath = `orders/${orderId}/UserOrder`;
+        // Create a new document in the /orders collection with the user's email and current date as the document ID
+        const orderId = `${user.email}_${new Date().toISOString()}`;
+        const orderDocRef = doc(db, "orders", orderId);
+  
+        // Add the user's email to the order document
+        await setDoc(orderDocRef, {
+          userEmail: user.email,
+          orderDate: new Date().toISOString(),
+        });
+  
+        // Add a subcollection called UserOrder inside the order document
+        const userOrderCollectionPath = `orders/${orderId}/UserOrder`;
 
       // Add each item in the cart to the UserOrder subcollection
       for (const item of cart) {
