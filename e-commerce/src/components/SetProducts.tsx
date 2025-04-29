@@ -29,7 +29,7 @@ const SetProducts = () => {
     // Dispatch the fetched products to Redux store
     useEffect(() => {
         if (productsData) {
-            dispatch(setProducts(productsData.data));
+            dispatch(setProducts(productsData));
         }
     }, [productsData, dispatch]);
 

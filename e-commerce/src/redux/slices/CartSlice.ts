@@ -27,7 +27,7 @@ const cartSlice = createSlice({
     },
     // Update the quantity of a product in the cart
     updateQuantity: (state, action: PayloadAction<{ id: number; quantity: number }>) => {
-      const item = state.items.find(item => item.id === action.payload.id);
+      const item = state.items.find(item => item.id === action.payload.id.toString());
       if (item) {
         item.quantity = action.payload.quantity;
       }
@@ -35,7 +35,7 @@ const cartSlice = createSlice({
     },
     // Remove a product from the cart
     removeFromCart: (state, action: PayloadAction<number>) => {
-      state.items = state.items.filter(item => item.id !== action.payload);
+      state.items = state.items.filter(item => item.id !== action.payload.toString());
       sessionStorage.setItem('cart', JSON.stringify(state.items)); // Persist to session storage
     },
     // Clear the cart (e.g., after checkout)

@@ -24,7 +24,7 @@ const CategoryFilter = () => {
     // Dispatch the fetched categories to Redux store
     useEffect(() => {
         if (categoryData) {
-            dispatch(setCategories(categoryData.data));
+            dispatch(setCategories(categoryData));
         }
     }, [categoryData, dispatch]);
 

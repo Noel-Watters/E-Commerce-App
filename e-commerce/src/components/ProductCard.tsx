@@ -20,6 +20,7 @@ const ProductCard:React.FC<{product: Product}> = ({product}) => {
             return '1.2rem'; // Larger font for short descriptions
         };
 
+
     return (                        
     <Card className="shadow-sm">
         <Card.Body>
@@ -38,9 +39,6 @@ const ProductCard:React.FC<{product: Product}> = ({product}) => {
             >
                 {product.description}
             </Card.Text>
-            <Card.Text>
-                    Rating: {product.rating.rate} / 5
-                </Card.Text>
             <Button variant="primary" className="mt-2" onClick={handleAddToCart}>
                 Add to Cart
             </Button>
