@@ -1,10 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-import { clearCart, removeFromCart, updateQuantity } from '../redux/slices/CartSlice';
+import { removeFromCart, updateQuantity } from '../redux/slices/CartSlice';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
+import Checkout from './Checkout'; 
 
 interface CartModalProps {
   show: boolean;
@@ -17,11 +18,7 @@ const CartModal: React.FC<CartModalProps> = ({ show, handleClose }) => {
 
   const totalPrice = cartItems.reduce((total, item) => total + item.price * (item.quantity || 1), 0);
 
-  const handleCheckout = () => {
-    dispatch(clearCart());
-    alert('Checkout successful!');
-    handleClose();
-  };
+
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -71,12 +68,7 @@ const CartModal: React.FC<CartModalProps> = ({ show, handleClose }) => {
       </Modal.Body>
       <Modal.Footer>
         <h5>Total: ${totalPrice.toFixed(2)}</h5>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
-        <Button variant="success" onClick={handleCheckout}>
-          Checkout
-        </Button>
+        <Checkout />
       </Modal.Footer>
     </Modal>
   );
