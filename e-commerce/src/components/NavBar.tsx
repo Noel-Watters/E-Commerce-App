@@ -21,7 +21,7 @@ const NavBar = () => {
               <>
                 <NavDropdown title="Profile" id="profile-dropdown">
                   <NavDropdown.Item as={Link} to={`/profile/${user.id}`}>Profile</NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/product/edit">Edit Product</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/product/manage">Edit Products</NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item > <LogoutButton /> </NavDropdown.Item>
                 </NavDropdown>

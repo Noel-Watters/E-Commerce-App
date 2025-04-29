@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import RegisterPage from "./pages/RegisterPage";
 import Login from "./pages/Login";
 import ProfilePage from "./pages/ProfilePage";
-import ProductEditPage from "./pages/ProductEditPage";
+import ProductManagementPage from "./pages/ProductManagmentPage";
 import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 
@@ -23,7 +23,7 @@ function App() {
           {user && (
             <Route path={`/profile/${user.id}`} element={<ProfilePage />} />
           )}
-          <Route path="/product/:id" element={<ProductEditPage />} />
+          <Route path="/product/manage" element={<ProductManagementPage />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
