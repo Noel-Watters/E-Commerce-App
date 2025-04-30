@@ -56,4 +56,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
-            
