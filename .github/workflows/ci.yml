@@ -24,7 +24,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18' # Use a Node.js version compatible with your React app
+          node-version: '22' # Use a Node.js version compatible with your React app
 
       # Step 3: Install dependencies
       - name: Install dependencies
@@ -34,7 +34,7 @@ jobs:
       - name: Build project
         run: npm run build
 
-      # Step 5: Run tests
+      # Step 5: Run test
       - name: Run tests
         run: npm test -- --watchAll=false
 
@@ -48,4 +48,5 @@ jobs:
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
             
