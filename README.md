@@ -1,4 +1,5 @@
 # E-Commerce Web Application
+Adding this to test commit.
 
 This is a fully functional e-commerce web application built with **React**, **TypeScript**, **Redux Toolkit**, **React Query**, and **Bootstrap**. The application allows users to browse products, filter them by category, add items to a shopping cart, and simulate a checkout process. It also includes user authentication and product management features integrated with **Firebase Firestore**.
 
