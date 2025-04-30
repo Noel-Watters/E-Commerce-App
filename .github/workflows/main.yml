@@ -34,24 +34,19 @@ jobs:
       - name: Build project
         run: npm run build
 
-      # Debug Step 1: Check file structure
-      - name: Debug file structure
-        run: ls -R src
-
-      # Debug Step 2: Debug Jest configuration
-      - name: Debug Jest configuration
-        run: npx jest --showConfig
-
-      # Debug Step 3: Run Jest with debugging
-      - name: Run Jest with debugging
-        run: npx jest --listTests
-
       # Step 5: Run tests
       - name: Run tests
         run: npx jest --testMatch="**/__tests__/**/*.[jt]s?(x)" --watchAll=false
 
-      # Step 6: Commit and push changes to the main branch
-      - name: commit and push changes
+      # Step 6: Switch to the main branch
+      - name: Checkout main branch
+        run: |
+          git fetch origin main
+          git checkout main
+          git pull origin main
+
+      # Step 7: Commit and push changes to the main branch
+      - name: Commit and push changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
