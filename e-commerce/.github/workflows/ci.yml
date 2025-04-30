@@ -1,0 +1,51 @@
+name: CI Pipeline
+
+# Run the workflow on pushes and pull requests
+on:
+  push:
+    branches:
+      - dev
+    paths-ignore:
+      - '**.yml' # Ignore changes made by the workflow itself
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Use a Node.js version compatible with your React app
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Build the project
+      - name: Build project
+        run: npm run build
+
+      # Step 5: Run tests
+      - name: Run tests
+        run: npm test -- --watchAll=false
+
+      # Step 6: Commit and push changes to the main branch
+      - name: commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Automated changes from CI pipeline"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+            
