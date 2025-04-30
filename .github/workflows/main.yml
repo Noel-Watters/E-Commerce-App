@@ -37,19 +37,17 @@ jobs:
       # Step 5: Run tests
       - name: Run tests
         run: npx jest --testMatch="**/__tests__/**/*.[jt]s?(x)" --watchAll=false
-      # Clear Git cache and force stage changes
-      - name: Force Git to detect changes
-        run: |
-          git add --all
-          git status
 
       # Step 6: Switch to the main branch
       - name: Checkout main branch
         run: |
           git fetch origin main
           git checkout main
-          git reset --hard origin/dev
-          git pull --rebase origin main 
+          git pull origin main
+          
+      # Clear Git cache
+      - name: Clear Git cache
+        run: git rm -r --cached .
 
       # Step 7: Commit and push changes to the main branch
       - name: Commit and push changes
@@ -58,7 +56,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "Automated changes from CI pipeline"
-          git push origin main --force
+          git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
