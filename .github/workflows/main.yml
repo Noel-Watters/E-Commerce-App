@@ -38,13 +38,17 @@ jobs:
       - name: Debug file structure
         run: ls -R src
 
-      # Debug Step 2: Run Jest with debugging
+      # Debug Step 2: Debug Jest configuration
+      - name: Debug Jest configuration
+        run: npx jest --showConfig
+
+      # Debug Step 3: Run Jest with debugging
       - name: Run Jest with debugging
         run: npx jest --listTests
 
       # Step 5: Run tests
       - name: Run tests
-        run: npx jest -- --watchAll=false
+        run: npx jest --testMatch="**/__tests__/**/*.[jt]s?(x)" --watchAll=false
 
       # Step 6: Commit and push changes to the main branch
       - name: commit and push changes
