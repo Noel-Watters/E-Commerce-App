@@ -31,7 +31,7 @@ This is a fully functional e-commerce web application built with **React**, **Ty
 ### Responsive Design
 - The application is fully responsive, with a clean and modern UI built using **Bootstrap**.
 
---- 
+---
 
 ## Getting Started
 
