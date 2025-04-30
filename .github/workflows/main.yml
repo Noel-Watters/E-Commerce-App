@@ -38,21 +38,13 @@ jobs:
       - name: Run tests
         run: npx jest --testMatch="**/__tests__/**/*.[jt]s?(x)" --watchAll=false
 
-      # Step 6: Switch to the main branch
-      - name: Checkout main branch
+      # Step 6: Force push dev to main
+      - name: Force push dev to main
+        if: success() # Only run this step if all previous steps succeed
         run: |
-          git fetch origin main
-          git checkout main
-          git pull origin main 
-
-      # Step 7: Commit and push changes to the main branch
-      - name: Commit and push changes
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "Automated changes from CI pipeline" || echo "No changes to commit"
-          git push origin main --force
+          git fetch origin dev
+          git checkout dev
+          git push origin dev:main --force
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
