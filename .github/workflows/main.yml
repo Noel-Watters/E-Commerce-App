@@ -34,6 +34,14 @@ jobs:
       - name: Build project
         run: npm run build
 
+      # Debug Step 1: Check file structure
+      - name: Debug file structure
+        run: ls -R src
+
+      # Debug Step 2: Run Jest with debugging
+      - name: Run Jest with debugging
+        run: jest --listTests
+
       # Step 5: Run test
       - name: Run tests
         run: npm test -- --watchAll=false
