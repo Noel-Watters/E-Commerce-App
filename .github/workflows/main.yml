@@ -49,7 +49,7 @@ jobs:
           git fetch origin main
           git checkout main
           git reset --hard origin/dev
-          git pull origin main
+          git pull --rebase origin main 
 
       # Step 7: Commit and push changes to the main branch
       - name: Commit and push changes
