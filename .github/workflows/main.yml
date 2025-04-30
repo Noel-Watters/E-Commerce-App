@@ -43,7 +43,7 @@ jobs:
         run: |
           git fetch origin main
           git checkout main
-          git pull origin main --force
+          git pull origin main 
 
       # Step 7: Commit and push changes to the main branch
       - name: Commit and push changes
@@ -52,7 +52,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "Automated changes from CI pipeline" || echo "No changes to commit"
-          git push origin main
+          git push origin main --force
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
