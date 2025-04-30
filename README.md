@@ -176,6 +176,7 @@ src/
 - **React-Bootstrap**: Bootstrap components for React.
 - **Firebase**: Backend services for authentication and Firestore database.
 
+
 ---
 
 ## Firebase Integration
