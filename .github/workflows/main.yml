@@ -47,6 +47,6 @@ jobs:
           git commit -m "Automated changes from CI pipeline"
           git push origin main
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
             
