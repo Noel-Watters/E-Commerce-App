@@ -40,11 +40,11 @@ jobs:
 
       # Debug Step 2: Run Jest with debugging
       - name: Run Jest with debugging
-        run: jest --listTests
+        run: npx jest --listTests
 
-      # Step 5: Run test
+      # Step 5: Run tests
       - name: Run tests
-        run: npm test -- --watchAll=false
+        run: npx jest -- --watchAll=false
 
       # Step 6: Commit and push changes to the main branch
       - name: commit and push changes
