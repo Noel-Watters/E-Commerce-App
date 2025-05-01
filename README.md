@@ -37,6 +37,7 @@ This is a fully functional e-commerce web application built with **React**, **Ty
 - **CD Pipeline**:
   - Added a **CD Pipeline** (`deploy.yml`) that:
     - Automatically deploys the application to **Vercel** whenever changes are pushed to the `main` branch.
+    - https://e-commerce-app-eta-amber.vercel.app 
 
 ### Responsive Design
 - The application is fully responsive, with a clean and modern UI built using **Bootstrap**.
