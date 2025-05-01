@@ -1,8 +1,9 @@
+//SetProducts.tsx
 import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useDispatch, useSelector} from 'react-redux';
-import { fetchProducts } from '../api/api';
-import { setProducts } from '../redux/slices/PorductSlice';
+import { fetchProducts } from '../api/FetchFirestone';
+import { setProducts } from '../redux/slices/ProductSlice';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { RootState } from '../redux/store';

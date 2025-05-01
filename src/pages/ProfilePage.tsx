@@ -1,3 +1,4 @@
+// ProfilePage.tsx
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
@@ -11,7 +12,6 @@ import Alert from "react-bootstrap/Alert";
 import EditProfile from "../components/EditProfile";
 import { useNavigate } from "react-router-dom";
 import { User } from "../types/types"; 
-//import LogOrderIDs from "../components/Testing";
 import OrderHistory from "../components/OrderHistory";
 
 const ProfilePage = () => {

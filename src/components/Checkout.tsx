@@ -1,9 +1,10 @@
-import React from "react";
+//Checkout.tsx
+import React from "react"; //Necessary for testing the component
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { clearCart } from "../redux/slices/CartSlice"; // Action to clear the cart
+import { clearCart } from "../redux/slices/CartSlice"; 
 import { db } from "../firebase/firebaseConfig";
-import { doc, setDoc} from "firebase/firestore"; // Use setDoc and collection for nested structure
+import { doc, setDoc} from "firebase/firestore"; 
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 

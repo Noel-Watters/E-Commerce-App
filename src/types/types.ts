@@ -34,3 +34,12 @@ export interface OrderItem {
     orderDate: string;
     items: OrderItem[];
   }
+
+  export interface EditProfileProps {
+    show: boolean;
+    onHide: () => void;
+    user: User | null;
+    setUser: (updatedUser: User) => void;
+    
+  }
+  

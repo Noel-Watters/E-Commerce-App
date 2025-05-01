@@ -1,3 +1,4 @@
+// ShoppingCart.tsx
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
@@ -18,8 +19,6 @@ const CartModal: React.FC<CartModalProps> = ({ show, handleClose }) => {
 
   const totalPrice = cartItems.reduce((total, item) => total + item.price * (item.quantity || 1), 0);
 
-
-
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -36,7 +35,7 @@ const CartModal: React.FC<CartModalProps> = ({ show, handleClose }) => {
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Total</th>
-                <th>Actions</th>
+                <th style={{ width: "10%" }}>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -49,14 +48,15 @@ const CartModal: React.FC<CartModalProps> = ({ show, handleClose }) => {
                       type="number"
                       value={item.quantity}
                       min="1"
+                      style={{ width: "60px" }} // Limit input field width
                       onChange={(e) =>
-                        dispatch(updateQuantity({ id: Number(item.id), quantity: Number(e.target.value) }))
+                        dispatch(updateQuantity({ id: item.id, quantity: Number(e.target.value) }))
                       }
                     />
                   </td>
                   <td>${(item.price * (item.quantity || 1)).toFixed(2)}</td>
-                  <td>
-                    <Button variant="danger" onClick={() => dispatch(removeFromCart(Number(item.id)))}>
+                  <td className="text-nowrap">
+                    <Button variant="danger" size='sm' onClick={() => dispatch(removeFromCart(item.id))}>
                       Remove
                     </Button>
                   </td>

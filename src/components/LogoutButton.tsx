@@ -1,3 +1,4 @@
+//LogoutButton.tsx
 import Button from 'react-bootstrap/Button';
 import { signOut } from 'firebase/auth';
 import { auth } from "../firebase/firebaseConfig";

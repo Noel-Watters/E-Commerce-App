@@ -1,7 +1,8 @@
+// CategoryFilter.tsx
 import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
-import { fetchCategories } from '../api/api';
+import { fetchCategories } from '../api/FetchFirestone';
 import { setCategories, setSelectedCategory} from '../redux/slices/CategorySlice';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';

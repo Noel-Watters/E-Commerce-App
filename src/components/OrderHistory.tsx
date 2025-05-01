@@ -1,8 +1,4 @@
-// I want to take the orders we made from the Checkout.tsx component and display them in the OrderHistory.tsx component.
-// it should be very simple with Item : Quntity : Price
-// I would also like to include a total cost at the bottom of the page
-// I would like to use Bootstrap for all formatting
-
+//OrderHistory.tsx
 import { useEffect, useState } from "react";
 import { db } from "../firebase/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
@@ -10,13 +6,17 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import Table from "react-bootstrap/Table";
 import Alert from "react-bootstrap/Alert";
-import DateFormatter from "./DateFormatter"; // Import the reusable DateFormatter component
+import DateFormatter from "./DateFormatter"; 
 import { OrderItem, Order } from "../types/types";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
 
 
 
 const OrderHistory = () => {
-  const user = useSelector((state: RootState) => state.user.user); // Get user info from Redux
+  const user = useSelector((state: RootState) => state.user.user); 
   const [orders, setOrders] = useState<Order[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -67,44 +67,61 @@ const OrderHistory = () => {
   }, [user]);
 
   return (
-    <div className="container mt-5">
-      <h2 className="mb-4">Order History</h2>
-      {error && <Alert variant="danger">{error}</Alert>}
-      {!error && orders.length === 0 && <p>No orders found.</p>}
+    <Container className="mt-5">
+      <Row>
+        <Col>
+          <h2 className="mb-4 ">Order History</h2>
+          {error && <Alert variant="danger">{error}</Alert>}
+          {!error && orders.length === 0 && (
+            <p>No orders found.</p>
+          )}
+        </Col>
+      </Row>
       {orders.length > 0 && (
-        <>
+        <Row>
           {orders.map((order, index) => (
-            <div key={index} className="mb-4">
-              <h4>
-                Order Date: <DateFormatter isoDate={order.orderDate} />
-              </h4>
-              <Table striped bordered hover>
-                <thead>
-                  <tr>
-                    <th>Item</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {order.items.map((item, itemIndex) => (
-                    <tr key={itemIndex}>
-                      <td>{item.title}</td>
-                      <td>{item.quantity}</td>
-                      <td>${item.price.toFixed(2)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-              <h5 className="mt-2">
-                Total Cost: $
-                {order.items.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}
-              </h5>
-            </div>
+            <Col key={index} md={6} className="mb-4">
+              <div className="card">
+                <div className="card-header">
+                  <h5 className="mb-0">
+                    Order Date: <DateFormatter isoDate={order.orderDate} />
+                  </h5>
+                </div>
+                <div className="card-body">
+                  <Table striped bordered hover size="sm">
+                    <thead>
+                      <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {order.items.map((item, itemIndex) => (
+                        <tr key={itemIndex}>
+                          <td>{item.title}</td>
+                          <td>{item.quantity}</td>
+                          <td>${item.price.toFixed(2)}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                  <h5 className="text-end mt-3">
+                    Total Cost: $
+                    {order.items
+                      .reduce(
+                        (total, item) => total + item.price * item.quantity,
+                        0
+                      )
+                      .toFixed(2)}
+                  </h5>
+                </div>
+              </div>
+            </Col>
           ))}
-        </>
+        </Row>
       )}
-    </div>
+    </Container>
   );
 };
 

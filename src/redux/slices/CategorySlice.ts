@@ -1,3 +1,4 @@
+//CategorySlice.ts
 import { Category } from "../../types/types";
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 

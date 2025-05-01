@@ -1,4 +1,4 @@
-
+//PorductCard.tsx
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Product } from '../types/types';

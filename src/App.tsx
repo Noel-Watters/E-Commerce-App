@@ -1,3 +1,4 @@
+//App.tsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../src/pages/HomePage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

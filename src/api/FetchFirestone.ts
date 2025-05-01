@@ -1,3 +1,4 @@
+//FetchFirestone.ts
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import { Product, Category } from "../types/types";

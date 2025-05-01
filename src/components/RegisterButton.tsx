@@ -1,4 +1,5 @@
-import React from 'react';
+//RegisterButton.tsx
+import React from 'react'; //Necessary for testing purposes
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 
