@@ -1,5 +1,4 @@
 # E-Commerce Web Application
-Adding this to test commit.
 
 This is a fully functional e-commerce web application built with **React**, **TypeScript**, **Redux Toolkit**, **React Query**, and **Bootstrap**. The application allows users to browse products, filter them by category, add items to a shopping cart, and simulate a checkout process. It also includes user authentication and product management features integrated with **Firebase Firestore**.
 
@@ -17,17 +16,27 @@ This is a fully functional e-commerce web application built with **React**, **Ty
 - **Cart Management**: Users can view, update quantities, and remove items from the cart.
 - **Total Price Calculation**: The cart dynamically calculates the total price and total number of items.
 - **Session Persistence**: The cart state is saved in `sessionStorage` to persist across browser sessions.
-- **Checkout**: Simulates a checkout process by clearing the cart and displaying a success message.
+- **Checkout**: Simulates a checkout process by clearing the cart, saving the order to Firestore, and displaying a success message.
 
 ### User Authentication
 - **Login and Registration**: Users can register and log in using Firebase Authentication.
 - **Protected Routes**: Certain pages (e.g., Profile and Product Management) are accessible only to logged-in users.
 
 ### Product Management
-- **Add Product**: Admins can add new products to the Firestore database via a modal form.
-- **Edit Product**: Admins can edit existing product details, including title, price, category, description, and image.
-- **Delete Product**: Admins can delete products from the Firestore database.
+- **Add Product**: Users can add new products to the Firestore database via a modal form.
+- **Edit Product**: Users can edit existing product details, including title, price, category, description, and image.
+- **Delete Product**: Users can delete products from the Firestore database.
 - **Dynamic Category Dropdown**: The category field in the product form is a dropdown menu populated with existing categories from Firestore.
+
+### Continuous Integration and Deployment (CI/CD)
+- **CI Pipeline**:
+  - Added a **CI Pipeline** (`CI.yml`) that:
+    - Runs tests on every push to the `dev` branch.
+    - If tests pass, automatically merges changes into the `main` branch.
+    - Triggers the deployment pipeline (`deploy.yml`) upon successful merge.
+- **CD Pipeline**:
+  - Added a **CD Pipeline** (`deploy.yml`) that:
+    - Automatically deploys the application to **Vercel** whenever changes are pushed to the `main` branch.
 
 ### Responsive Design
 - The application is fully responsive, with a clean and modern UI built using **Bootstrap**.
@@ -49,7 +58,7 @@ Make sure you have the following installed on your system:
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/e-commerce-web-app.git
-   cd e-commerce-web-app
+   cd e-commerce
    ```
 
 2. Install dependencies:
@@ -131,6 +140,7 @@ The production-ready files will be in the `dist` folder.
 
 ```
 src/
+├── .github/workflow    #CI & DC Github Workflows
 ├── api/                # API calls to Firestore
 ├── assets/             # Static assets
 ├── components/         # Reusable components (e.g., ProductCard, CartButton, ProtectedRoute)
@@ -166,16 +176,41 @@ src/
 3. Edit or delete existing products directly from the product table.
 
 ---
+## Testing
+
+### Unit Tests
+- Added unit tests for the following components:
+  - **`CartSlice.test.js`**: Tests the Redux slice for cart functionality.
+  - **`RegisterButton.test.js`**: Tests the behavior of the registration button.
+
+### Integration Tests
+- Added an integration test:
+  - **`CartIntegration.test.js`**: Tests the shopping cart's functionality, including adding, updating, and removing items.
+
+### Testing Tools
+- **Jest**: Used for writing and running tests.
+- **Babel**: Configured for transpiling test files.
+
+---
+
+## Deployment
+
+- **Vercel**: The application is deployed to **Vercel** for production.
+- **GitHub**: Used for version control and CI/CD integration.
+
+---
 
 ## Technologies Used
 
 - **React**: Frontend library for building user interfaces.
 - **TypeScript**: Strongly typed JavaScript for better code quality.
 - **Redux Toolkit**: State management for the shopping cart and user authentication.
-- **React Query**: Data fetching and caching for API calls.
+- **Vite**: Fast build tool and development server for modern web applications.
 - **Bootstrap**: Responsive design and styling.
 - **React-Bootstrap**: Bootstrap components for React.
 - **Firebase**: Backend services for authentication and Firestore database.
+- **Jest**: Testing framework for unit and integration tests.
+- **Bable**: JavaScript compiler used for transpiling test files.
 
 
 ---
@@ -190,6 +225,18 @@ src/
 
 ### Authentication
 - **Email/Password Authentication**: Users can register and log in using their email and password.
+
+## Future Improvements
+
+### Enhanced Testing
+- Add more unit tests for additional components.
+- Implement snapshot testing to ensure UI consistency.
+
+### Admin-Only Product Management
+- Restrict product management features (add, edit, delete) to admin users only.
+
+### Google Login Integration
+- Add Google Login as an authentication option for users.
 
 ---
 
@@ -221,3 +268,11 @@ This project is for educational purposes and uses Firebase for backend services.
   - Added session persistence using `sessionStorage`.
   - Improved total price and quantity calculations.
 - Updated **responsive design** using **React-Bootstrap**.
+
+### v1.2.0
+- Added **CI/CD Pipelines**:
+  - CI pipeline for testing and merging changes.
+  - CD pipeline for automatic deployment to **Vercel**.
+- Added unit tests for **CartSlice** and **RegisterButton**.
+- Added integration test for shopping cart functionality.
+- Refactored and organized code for improved readability.
