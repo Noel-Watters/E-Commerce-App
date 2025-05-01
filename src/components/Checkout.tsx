@@ -1,11 +1,4 @@
-//I need to write a component that will add the item name, item ID, item price, & quantity to Firestore as an order. 
-// This should also clear the curret cart
-// There should be a success message when the order is placed
-// all formatting should be done with Bootstrap
-// Redux is handling the cart state
-// The component should be called Checkout.tsx
-// This should simply be a button that is connected to checkout button in ShoppingCart.tsx
-
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { clearCart } from "../redux/slices/CartSlice"; // Action to clear the cart

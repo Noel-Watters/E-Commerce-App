@@ -23,3 +23,14 @@ export interface User {
     name: string;
     email: string;
 }
+
+export interface OrderItem {
+    title: string;
+    price: number;
+    quantity: number;
+  }
+  
+  export interface Order {
+    orderDate: string;
+    items: OrderItem[];
+  }

@@ -11,17 +11,9 @@ import { RootState } from "../redux/store";
 import Table from "react-bootstrap/Table";
 import Alert from "react-bootstrap/Alert";
 import DateFormatter from "./DateFormatter"; // Import the reusable DateFormatter component
+import { OrderItem, Order } from "../types/types";
 
-interface OrderItem {
-  title: string;
-  price: number;
-  quantity: number;
-}
 
-interface Order {
-  orderDate: string;
-  items: OrderItem[];
-}
 
 const OrderHistory = () => {
   const user = useSelector((state: RootState) => state.user.user); // Get user info from Redux
