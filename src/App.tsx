@@ -9,6 +9,7 @@ import ProductManagementPage from "./pages/ProductManagmentPage";
 import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 import ProtectedRoute from "./components/PortectedRoute";
+import AdminRoute from "./components/AdminRoute";
 
 const queryClient = new QueryClient();
 
@@ -33,9 +34,9 @@ function App() {
           <Route
             path="/product/manage"
             element={
-              <ProtectedRoute>
+              <AdminRoute>
                 <ProductManagementPage />
-              </ProtectedRoute>
+              </AdminRoute>
             }
           />
         </Routes>
