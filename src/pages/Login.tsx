@@ -4,7 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { doc, getDoc } from "firebase/firestore";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -14,11 +14,16 @@ import RegisterButton from "../components/RegisterButton";
 import NavBar from "../components/NavBar";
 import Row from "react-bootstrap/Row";
 import { setUser } from "../redux/slices/UserSlice";
+import GoogleSignInButton from "../components/GoogleSignInButton"; 
+import MissingInfoPrompt from "../components/MissingInfoPrompt";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
+  const [showMissingInfo, setShowMissingInfo] = useState(false);
+  const [googleUserId, setGoogleUserId] = useState<string | null>(null);
+  const [googleUserEmail, setGoogleUserEmail] = useState<string>("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -52,6 +57,26 @@ const Login = () => {
       setError(err.message);
     }
   };
+
+  const handleGoogleSignInResult = (user: { uid: string; email: string; displayName: string | null }) => {
+  if (!user.displayName) {
+    setGoogleUserId(user.uid);
+    setGoogleUserEmail(user.email || "");
+    setShowMissingInfo(true);
+  } else {
+    // proceed as normal
+  }
+};
+
+const handleMissingInfoSubmit = async (name: string) => {
+  if (!googleUserId) return;
+  const userDocRef = doc(db, "users", googleUserId);
+  await setDoc(userDocRef, { name }, { merge: true });
+  // Optionally update Redux state here
+  setShowMissingInfo(false);
+};
+
+
   return (
 
     <Container >
@@ -86,11 +111,20 @@ const Login = () => {
         <Button variant="primary" type="submit" className="me-2">
           Login
         </Button>
-        <RegisterButton />
+        <GoogleSignInButton onSignInResult={handleGoogleSignInResult} /> {/* Google Sign-In button added here */}
+        <RegisterButton /> {/*Register button added here*/}
       </Form>
       </Row>
+      <MissingInfoPrompt
+      show={showMissingInfo}
+      onSubmit={handleMissingInfoSubmit}
+      onClose={() => setShowMissingInfo(false)}
+      email={googleUserEmail}
+      />
     </Container>
   );
 };
+
+
 
 export default Login;

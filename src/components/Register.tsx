@@ -33,6 +33,7 @@ const Register = () => {
         id: userId,
         name,
         email,
+        admin: false, // Ensure new users are not admins by default
       };
 
       // Save the user document in Firestore
