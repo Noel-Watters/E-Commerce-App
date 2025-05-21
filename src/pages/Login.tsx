@@ -44,7 +44,8 @@ const Login = () => {
           setUser({
             id: user.uid,
             email: user.email || "",
-            name: userData.name || "", // Fetch the name from Firestore
+            name: userData.name || "",
+            admin: userData.admin || false,
           })
         );
       } else {
