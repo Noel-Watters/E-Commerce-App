@@ -23,10 +23,11 @@ This is a fully functional e-commerce web application built with **React**, **Ty
 - **Protected Routes**: Certain pages (e.g., Profile and Product Management) are accessible only to logged-in users.
 
 ### Product Management
-- **Add Product**: Users can add new products to the Firestore database via a modal form.
-- **Edit Product**: Users can edit existing product details, including title, price, category, description, and image.
-- **Delete Product**: Users can delete products from the Firestore database.
-- **Dynamic Category Dropdown**: The category field in the product form is a dropdown menu populated with existing categories from Firestore.
+- **Admin-Only Access**: Only admin users can add, edit, or delete products. Product management features are restricted to users with admin privileges.
+- **Add Product**: Admins can add new products to the Firestore database via a modal form.
+- **Edit Product**: Admins can edit existing product details, including title, price, category, description, and image.
+- **Delete Product**: Admins can delete products from the Firestore database.
+
 
 ### Continuous Integration and Deployment (CI/CD)
 - **CI Pipeline**:
@@ -169,7 +170,8 @@ src/
 
 ### User Authentication
 1. Register or log in to access protected routes.
-2. Logged-in users can view their profile and manage products.
+2. You can log in with your email/password or with your Google account.
+3. Logged-in users can view their profile and manage products (admin only).
 
 ### Product Management
 1. Navigate to `/product/manage` (requires login).
@@ -226,18 +228,7 @@ src/
 
 ### Authentication
 - **Email/Password Authentication**: Users can register and log in using their email and password.
-
-## Future Improvements
-
-### Enhanced Testing
-- Add more unit tests for additional components.
-- Implement snapshot testing to ensure UI consistency.
-
-### Admin-Only Product Management
-- Restrict product management features (add, edit, delete) to admin users only.
-
-### Google Login Integration
-- Add Google Login as an authentication option for users.
+- **Google Login**: Users can log in with their Google account using Firebase Authentication.
 
 ---
 
@@ -277,3 +268,6 @@ This project is for educational purposes and uses Firebase for backend services.
 - Added unit tests for **CartSlice** and **RegisterButton**.
 - Added integration test for shopping cart functionality.
 - Refactored and organized code for improved readability.
+### v1.3.0
+- Implemented **Admin-Only Product Management**: Only admin users can add, edit, or delete products.
+- Added **Google Login Integration**: Users can now log in with their Google account.
